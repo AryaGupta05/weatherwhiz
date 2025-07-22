@@ -2,11 +2,9 @@ services:
   - type: web
     name: weatherwhiz-backend
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "uvicorn backend.app:app --host 0.0.0.0 --port $PORT"
     plan: free
-
-  - type: static
-    name: weatherwhiz-frontend
-    env: static
-    staticPublishPath: frontend
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host=0.0.0.0 --port=$PORT
+    envVars:
+      - key: PORT
+        value: 10000
